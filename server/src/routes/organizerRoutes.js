@@ -1,14 +1,20 @@
 import express from "express";
-const router = express.Router();
-import * as organizerController from "../controllers/organizerController.js";
+import {
+  createHackathon,
+  getHackathons,
+  getHackathonProjects,
+  assignJudge,
+  addPrize,
+  declareWinner,
+} from "../controllers/organizerController.js";
 
-router.post("/hackathons", organizerController.createHackathon);
-router.get("/hackathons", organizerController.getHackathons);
-router.put("/hackathons/:id", organizerController.updateHackathon);
-router.delete("/hackathons/:id", organizerController.deleteHackathon);
-router.post("/hackathons/:id/judges", organizerController.assignJudge);
-router.post("/hackathons/:id/prizes", organizerController.addPrize);
-router.get("/hackathons/:id/projects", organizerController.getProjects);
-router.post("/hackathons/:id/winners", organizerController.declareWinner);
+const router = express.Router();
+
+router.post("/hackathons", createHackathon);
+router.get("/hackathons", getHackathons);
+router.get("/hackathons/:id/projects", getHackathonProjects);
+router.post("/hackathons/:id/judges", assignJudge);
+router.post("/hackathons/:id/prizes", addPrize);
+router.post("/hackathons/:id/winners", declareWinner);
 
 export default router;
