@@ -49,9 +49,7 @@ app.use(cookieParser());
 // Test route
 
 app.get("/", (req, res, next) => {
-  res
-    .status(200)
-    .json({ message: "Express Server built using create-xpress-starter" });
+   res.status(200).json({ message: "Server running" });
 });
 
 // Routers
@@ -60,26 +58,25 @@ app.use("/api/organizer", authenticate, restrictToOrganizer, organizerRoutes);
 app.use("/api/utils", utilsRouter);
 
 const dropTablesInOrder = async () => {
-  try {
-    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
-    await sequelize.drop();
-    await sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
-    console.log("All tables dropped successfully");
-  } catch (error) {
-    console.error("Error dropping tables:", error);
-  }
+   try {
+      await sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
+      await sequelize.drop();
+      await sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
+      console.log("All tables dropped successfully");
+   } catch (error) {
+      console.error("Error dropping tables:", error);
+   }
 };
-
 // Db Connection
 sequelize
-  .authenticate()
-  .then(async () => {
-    console.log("Database connected");
-    // await dropTablesInOrder();
-    defineAssociations();
-    await sequelize.sync({ alter: true });
-  })
-  .catch((err) => console.error("Database connection error:", err));
+   .authenticate()
+   .then(async () => {
+      console.log("Database connected");
+      // await dropTablesInOrder();
+      defineAssociations();
+      await sequelize.sync({ alter: true });
+   })
+   .catch((err) => console.error("Database connection error:", err));
 
 // Global Error Handler
 app.use(globalErrorHandler);
