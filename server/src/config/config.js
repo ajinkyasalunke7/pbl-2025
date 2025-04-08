@@ -9,6 +9,7 @@ const _config = {
   DB_NAME: process.env.DB_NAME,
   DB_USER: process.env.DB_USER,
   DB_PASSWORD: process.env.DB_PASSWORD,
+  BACKEND_URL: process.env.BACKEND_URL,
 };
 
 // Freeze the object to prevent any changes

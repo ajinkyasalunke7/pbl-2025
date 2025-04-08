@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js";
-import Team from "./team";
-import Hackathon from "./hackathon";
+import sequelize from "../config/database.js";
 
 const Project = sequelize.define("Project", {
   project_id: {
@@ -9,14 +7,13 @@ const Project = sequelize.define("Project", {
     primaryKey: true,
     autoIncrement: true,
   },
+  team_id: { type: DataTypes.INTEGER, allowNull: false },
+  hackathon_id: { type: DataTypes.INTEGER, allowNull: false },
   project_name: { type: DataTypes.STRING, allowNull: false },
-  description: { type: DataTypes.TEXT, allowNull: false },
+  description: { type: DataTypes.TEXT },
   github_url: { type: DataTypes.STRING },
   demo_url: { type: DataTypes.STRING },
-  submitted_at: { type: DataTypes.DATE },
+  submitted_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
 });
-
-Project.belongsTo(Team, { foreignKey: "team_id" });
-Project.belongsTo(Hackathon, { foreignKey: "hackathon_id" });
 
 export default Project;

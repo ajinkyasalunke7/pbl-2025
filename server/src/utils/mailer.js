@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { config } from "../config/config";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -23,6 +24,8 @@ export const sendInvitationEmail = async (
            <p>This invitation expires in 48 hours.</p>`,
   };
 
-  console.log(`http://localhost:3000/user/invitation/accept/${token}`);
+  console.log(
+    `Invitation to ${to}: Join ${teamName} for ${hackathonTitle} at ${config.BACKEND_URL}/api/user/invitation/accept/${token}`
+  );
   // await transporter.sendMail(mailOptions);
 };

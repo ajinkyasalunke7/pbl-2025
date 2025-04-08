@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js";
-import User from "./user";
+import sequelize from "../config/database.js";
 
 const Hackathon = sequelize.define("Hackathon", {
   hackathon_id: {
@@ -8,22 +7,14 @@ const Hackathon = sequelize.define("Hackathon", {
     primaryKey: true,
     autoIncrement: true,
   },
+  organizer_id: { type: DataTypes.INTEGER, allowNull: false },
   title: { type: DataTypes.STRING, allowNull: false },
-  description: { type: DataTypes.TEXT, allowNull: false },
+  description: { type: DataTypes.TEXT },
   start_date: { type: DataTypes.DATE, allowNull: false },
   end_date: { type: DataTypes.DATE, allowNull: false },
-  location: { type: DataTypes.STRING },
-  is_virtual: { type: DataTypes.BOOLEAN, defaultValue: false },
-  max_team_size: { type: DataTypes.INTEGER, defaultValue: 6 },
+  max_team_size: { type: DataTypes.INTEGER },
   registration_start_date: { type: DataTypes.DATE, allowNull: false },
   registration_end_date: { type: DataTypes.DATE, allowNull: false },
-  status: {
-    type: DataTypes.ENUM("upcoming", "ongoing", "completed"),
-    defaultValue: "upcoming",
-  },
-  created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
 });
-
-Hackathon.belongsTo(User, { as: "organizer", foreignKey: "organizer_id" });
 
 export default Hackathon;

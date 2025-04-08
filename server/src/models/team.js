@@ -1,16 +1,13 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js";
-import Hackathon from "./hackathon";
-import User from "./user";
+import sequelize from "../config/database.js";
 
 const Team = sequelize.define("Team", {
   team_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  hackathon_id: { type: DataTypes.INTEGER, allowNull: false },
   team_name: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.TEXT },
-  created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  team_leader_id: { type: DataTypes.INTEGER, allowNull: false },
+  team_size: { type: DataTypes.INTEGER, allowNull: false },
 });
-
-Team.belongsTo(Hackathon, { foreignKey: "hackathon_id" });
-Team.belongsTo(User, { as: "teamLeader", foreignKey: "team_leader_id" });
 
 export default Team;
