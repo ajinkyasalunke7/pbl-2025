@@ -31,5 +31,6 @@ router.get("/invitation/accept/:token", acceptInvitation);
 router.put("/profile", authenticate, updateProfile);
 router.get("/teams/:id", authenticate, getTeamDetails);
 router.post("/projects", authenticate, submitProject);
+router.get("/profile", getProfile);
 
 export default router;
